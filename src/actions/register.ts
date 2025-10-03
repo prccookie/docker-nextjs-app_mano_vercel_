@@ -1,7 +1,7 @@
 'use server'
 
 //import { PrismaClientKnownRequestError } from '@prisma/client/runtime/library'
-    import { Prisma } from '@prisma/client'
+import { Prisma } from '@prisma/client'
 import bcryptjs from 'bcryptjs'
 import type { z } from 'zod'
 import db from '@/lib/db'
