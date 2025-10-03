@@ -30,7 +30,7 @@ export const register = async (values: z.infer<typeof RegisterSchema>) => {
 
         return { success: 'アカウントを登録しました' }
     } catch (e: unknown) {
-        if (e instanceof Prisma.PrismaClientKnownRequestError) {
+        if (typeof e === 'object' && e !== null && 'code' in e/*e instanceof Prisma.PrismaClientKnownRequestError*/) {
             if (e.code === 'P2002') {
                 console.log('このメールアドレスは既に登録されています')
                 return { error: 'このメールアドレスは既に登録されています' }
