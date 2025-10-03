@@ -1,7 +1,7 @@
 'use server'
 
 //import { PrismaClientKnownRequestError } from '@prisma/client/runtime/library'
-import { Prisma } from '@prisma/client'
+    import { Prisma } from '@prisma/client'
 import bcryptjs from 'bcryptjs'
 import type { z } from 'zod'
 import db from '@/lib/db'
@@ -30,7 +30,8 @@ export const register = async (values: z.infer<typeof RegisterSchema>) => {
 
         return { success: 'アカウントを登録しました' }
     } catch (e: unknown) {
-        if (e instanceof Prisma.PrismaClientKnownRequestError) {
+        if (typeof e === 'object' && e !== null && 'code' in e/*e instanceof Prisma.PrismaClientKnownRequestError*/) {
+            const error = e as { code: string };
             if (e.code === 'P2002') {
                 console.log('このメールアドレスは既に登録されています')
                 return { error: 'このメールアドレスは既に登録されています' }
